@@ -1,18 +1,20 @@
-// index.js
 import express from 'express';
+import usersRoutes from './routes/users.js';
+import businessesRoutes from './routes/businesses.js';
+import productsRoutes from './routes/products.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware para parsear JSON
 app.use(express.json());
 
-// Ruta de prueba
+// Rutas
+app.use('/api/users', usersRoutes);
+app.use('/api/businesses', businessesRoutes);
+app.use('/api/products', productsRoutes);
+
 app.get('/', (req, res) => {
   res.send('¡Backend MercadoJG funcionando!');
 });
 
-// Levantar servidor
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`Servidor corriendo en http://localhost:${PORT}`));
